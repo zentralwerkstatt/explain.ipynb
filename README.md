@@ -1,6 +1,10 @@
-# Images of Image Machines. Visual Interpretability in Digital Art History
+# Images of Image Machines. Visual Interpretability in Computer Vision for Art
 
 This repository contains all the code necessary to reproduce the results in the paper "Images of Image Machines. Visual Interpretability in Computer Vision for Art" by Fabian Offert, to be published in the Proceedings of the 2018 European Conference on Computer Vision. It also provides extended commentary on the details of the technical implementation, and options to use the code for the easy exploration of other machine learning models (REST API, HTML interface).
+
+## Abstract
+
+Despite the emergence of interpretable machine learning as a distinct area of research, the role and possible uses of interpretability in digital art history are still unclear. Focusing on feature visualization as the most common technical manifestation of visual interpretability, we argue that in computer vision for art visual interpretability is desirable, if not indispensable. We propose that feature visualization images can be a useful tool if they are used in a non-traditional way that embraces their peculiar representational status. Moreover, we suggest that exactly because of this peculiar representational status, feature visualization images themselves deserve more attention from the computer vision and digital art history communities.
 
 ## Features
 
