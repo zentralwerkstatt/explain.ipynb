@@ -6,17 +6,21 @@ This repository contains all the code necessary to reproduce the results in the 
 
 Despite the emergence of interpretable machine learning as a distinct area of research, the role and possible uses of interpretability in digital art history are still unclear. Focusing on feature visualization as the most common technical manifestation of visual interpretability, we argue that in computer vision for art visual interpretability is desirable, if not indispensable. We propose that feature visualization images can be a useful tool if they are used in a non-traditional way that embraces their peculiar representational status. Moreover, we suggest that exactly because of this peculiar representational status, feature visualization images themselves deserve more attention from the computer vision and digital art history communities.
 
+![](66.jpg)
+
+*Semantically interesting feature visualization for layer mixed5/neuron 66 of an InceptionV3 model trained on ImageNet. A large number of feature visualization images for model discussed in the paper can be found in the [images](images) directory.*
+
 ## Features
 
 - Downloader for the Web Gallery of Art dataset
 - Complete workflow to train and evaluate a model on a user-defined subset of this dataset
 - Fast (threaded) feature visualization implementation for multiple architectures (currently InceptionV3 and VGG16) and all pre-trained Keras Models
 - Minimal but effective regularization
-- REST API for feature visualization generation from eternal interface
-- Sample HTML interface that uses this API
+- Feature visualization REST API
+- Sample HTML interface using this API
 
 ![](0.jpg)
-The essence of a portrait, according to InceptionV3.
+*The essence of a portrait, according to InceptionV3.*
 
 ## Installation
 
@@ -45,6 +49,7 @@ Clone this repository. Open [run_CPU.sh](docker/run_CPU.sh) or [run_GPU.sh](dock
 - [test.ipynb](test.ipynb): Evaluate the model
 - [explain.ipynb](explain.ipynb): Generate feature visualizations (standalone/API)
 - [interface.html](interface.html): Sample HTML interface for explain.ipynb REST API
+- [images](images): Directory containing a large number of feature visualization images for the model discussed in the paper.
 
 ## Interface
 
