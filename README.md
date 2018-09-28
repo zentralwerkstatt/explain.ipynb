@@ -28,7 +28,7 @@ We suggest running the notebooks within an [Anaconda](https://www.anaconda.com/d
 
 `conda install gevent Pillow`
 
-`pip install tensorflow-gpu keras jupyter_kernel_gateway tqdm`
+`pip install tensorflow-gpu keras jupyter_kernel_gateway tqdm`.
 
 Replace `tensorflow-gpu` with `tensorflow` for a CPU only installation. 
 
