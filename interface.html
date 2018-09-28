@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>Interface</title>
+		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet"> 
+		<style>
+
+			body {
+				background-color: black;
+				color: white;}
+			td {
+    			border: none;
+    			padding: 0;
+    			margin: 0;}
+			table {
+				border: none;
+				margin: 20px;
+				border-collapse: collapse;}
+			td img {
+    			display: block;
+    			margin-left: auto;
+    			margin-right: auto;}
+			.box {
+				position: relative; }
+			.overlay {
+				position: absolute;
+				left: 50%;
+				bottom: 20px;
+   				transform: translate(-50%, 0);
+   				color: black;}
+			form {
+				margin: 20px;}
+			* {
+  				font-family: 'IBM Plex Sans', sans-serif;
+  				font-size: 16px;}
+			.button {
+    			background-color: #e7e7e7; 
+    			color: black;
+    			border: none;
+    			text-align: center;
+    			text-decoration: none;
+    			display: inline-block;
+				height: 30px;}
+
+		</style>
+		<script>
+
+			// Access the complete DOM tree
+			window.onload = function() {
+
+	    		// Create table to hold everything
+	    		var body = document.body;
+	       		var table  = document.createElement('table');
+	    		var form = document.getElementById("form");
+	    		for (var y=1; y<11; y++) {
+	    			var tr = document.createElement("tr");
+	    			for (var x=0; x<1001; x++) {
+	    				var td = document.createElement("td");
+	    				td.id = "td_" + y.toString() + "_" + x.toString();
+	    				tr.appendChild(td);
+	    			}
+	    			table.appendChild(tr);
+	    		}
+	    		body.appendChild(table)
+	    	}
+
+	    	// Array to hold image nodes to be refreshed
+			var refresh = [];
+
+			// Refresh image nodes every 0.1 seconds to allow for live generation
+			setInterval(function() {
+				refresh.forEach(function(id) {
+					prev_src = document.getElementById(id).src
+					prev_src = prev_src.split("?")[0]
+   					document.getElementById(id).src = prev_src  + "?" + new Date().getTime();
+   				})
+			}, 100);
+
+			// Main REST function
+			function REST_request() {
+
+				var layer = document.getElementById("layer").value;
+	    		var neuron = document.getElementById("neuron").value;
+	    		var octave = document.getElementById("octave").value;
+
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+	    			if (this.readyState == 4 && this.status == 200) {
+	    				file = xhttp.responseText;
+	       				src = file + "?" + new Date().getTime();
+	       				var img = document.createElement('img');
+						img.setAttribute('src', src);
+						img.id = file;
+						var td = document.getElementById("td_" + octave.toString() + "_" + + neuron.toString());
+						div = document.createElement('div');
+						div.className = "box";
+						div.appendChild(img)
+						text = document.createElement('span');
+						text.className = "overlay"
+						text.innerHTML = layer + ":" + neuron.toString() + "x" + octave.toString();
+						div.append(text);
+						td.appendChild(div);
+						refresh.push(img.id);
+	    			}
+	    		}
+	    		var query = "http://pc.zentralwerkstatt.org:6006/activations/" + layer + "/" + neuron.toString() + "/" + octave.toString()
+				xhttp.open("GET", query, true);
+				xhttp.send();
+			}
+
+		</script>
+
+	</head>
+	<body>
+		<form id="form" action="index2.html">
+			explain.ipynb&nbsp;&nbsp;
+			LAYER&nbsp;&nbsp;<input type="text" id="layer" value="mixed5">&nbsp;&nbsp;
+    		NEURON&nbsp;&nbsp;<input type="number" id="neuron" value="1">&nbsp;&nbsp;
+    		OCTAVE&nbsp;&nbsp;<input type="number" id="octave" max="10" value="1">&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="button" class="button" onclick="REST_request()" value="RENDER">
+		</form>
+	</body>
+</html>

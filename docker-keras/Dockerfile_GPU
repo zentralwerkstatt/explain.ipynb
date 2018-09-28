@@ -1,0 +1,42 @@
+ARG cuda_version=9.0
+ARG cudnn_version=7
+
+FROM nvidia/cuda:${cuda_version}-cudnn${cudnn_version}-devel
+
+# Install system packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      bzip2 \
+      g++ \
+      git \
+      graphviz \
+      libgl1-mesa-glx \
+      libhdf5-dev \
+      openmpi-bin \
+      ca-certificates \
+      wget && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Miniconda
+ENV CONDA_DIR /opt/conda
+ENV PATH $CONDA_DIR/bin:$PATH
+RUN wget --quiet --no-check-certificate https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    /bin/bash /Miniconda3-latest-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
+    rm Miniconda3-latest-Linux-x86_64.sh && \
+    echo export PATH=$CONDA_DIR/bin:'$PATH' > /etc/profile.d/conda.sh
+
+# Install Tensorflow, Keras, Python packages
+RUN conda install -y python=3.6
+RUN conda install gevent Pillow
+RUN pip --default-timeout=1000 install --upgrade pip
+RUN pip --default-timeout=1000 install tensorflow-gpu keras jupyter_kernel_gateway tqdm
+RUN conda clean -yt
+
+# Set up volume
+RUN mkdir /data
+
+# Set up Jupyter  with password and the Jupyter Kernel Gateway and run
+WORKDIR /data
+EXPOSE 8888
+EXPOSE 6006
+CMD jupyter kernelgateway --KernelGatewayApp.api='kernel_gateway.notebook_http' --KernelGatewayApp.seed_uri='/data/backend.ipynb' --port=6006 --KernelGatewayApp.allow_origin=*
+CMD jupyter notebook --allow-root --port=8888 --ip=0.0.0.0 --no-browser --config="/data/docker-keras/jupyter_notebook_config.py"
