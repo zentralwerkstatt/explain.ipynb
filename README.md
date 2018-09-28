@@ -26,8 +26,9 @@ This repository officially only supports Unix-based operating systems but most l
 
 We suggest running the notebooks within an [Anaconda](https://www.anaconda.com/download) or [Miniconda](https://conda.io/miniconda.html) envrionment. The notebooks in the repository have only Python dependencies, all of which can be installed with `pip` or `conda`. To install all dependencies with conda in a Miniconda environment, run
 
-`conda install gevent Pillow 
-pip install tensorflow-gpu keras jupyter_kernel_gateway tqdm`
+`conda install gevent Pillow`
+
+`pip install tensorflow-gpu keras jupyter_kernel_gateway tqdm`
 
 Replace `tensorflow-gpu` with `tensorflow` for a CPU only installation. 
 
@@ -35,7 +36,7 @@ Finally, clone this repository and run a `jupyter notebook` server in the reposi
 
 ### Installation using [Docker](https://www.docker.com/)
 
-Clone this repository. Open `run_CPU.sh` or `run_GPU.sh` in a plain text editor of your choice and replace `YOUR PASWORD HERE` with a password of your choice. Run either `run_GPU.sh` or `run_CPU.sh for an environment with or without NVIDIA GPU support. NVIDIA support with Docker currently only works under Linux.
+Clone this repository. Open `run_CPU.sh` or `run_GPU.sh` in a plain text editor of your choice and replace `YOUR PASWORD HERE` with a password of your choice. Run either `run_GPU.sh` or `run_CPU.sh` for an environment with or without NVIDIA GPU support. NVIDIA support with Docker currently only works under Linux.
 
 ## Interface
 
