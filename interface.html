@@ -46,6 +46,8 @@
 		</style>
 		<script>
 
+			API_IP = "127.0.0.1";
+
 			// Access the complete DOM tree
 			window.onload = function() {
 
@@ -104,7 +106,7 @@
 						refresh.push(img.id);
 	    			}
 	    		}
-	    		var query = "http://pc.zentralwerkstatt.org:6006/activations/" + layer + "/" + neuron.toString() + "/" + octave.toString()
+	    		var query = "http://" + API_IP + ":6006/activations/" + layer + "/" + neuron.toString() + "/" + octave.toString()
 				xhttp.open("GET", query, true);
 				xhttp.send();
 			}

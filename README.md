@@ -38,6 +38,14 @@ Finally, clone this repository and run a `jupyter notebook` server in the reposi
 
 Clone this repository. Open [run_CPU.sh](docker/run_CPU.sh) or [run_GPU.sh](docker/run_GPU.sh) in a plain text editor of your choice and replace `YOUR PASSWORD HERE` with a password of your choice. Run either [run_GPU.sh](docker/run_GPU.sh) or [run_CPU.sh](docker/run_CPU.sh) for an environment with or without NVIDIA GPU support. NVIDIA support with Docker currently only works under Linux.
 
+## Main repository contents
+
+- [wga.ipynb](wga.ipynb): Download the dataset
+- [train.ipynb](train.ipynb): Fine-tune an InceptionV3 model on a subset of the dataset
+- [test.ipynb](test.ipynb): Evaluate the model
+- [explain.ipynb](explain.ipynb): Generate feature visualizations (standalone/API)
+- [interface.html](interface.html): Sample HTML interface for explain.ipynb REST API
+
 ## Interface
 
 The repository comes with an example [HTML interface](interface.html). When the [explain.ipynb](explain.ipynb) notebook is running in API mode (see notebook for details), the interface can be used to explore the feature visualization space for a model by generating feature visualization images for different layers, neurons, and in different resolutions. The visualization thread gives priority to high-resolution images, so if an interesting neuron is found, high resolution feature visualizations can be generated immediately. Interesting images can simply be saved by right clicking.
